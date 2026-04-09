@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+*.db
+richmenu.png
+server.log
+venv/
+.venv/
