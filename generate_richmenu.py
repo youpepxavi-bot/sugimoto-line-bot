@@ -94,9 +94,9 @@ def generate_rich_menu_image(output_path: str = "richmenu.png"):
             "accent": GOLD,
         },
         {
-            "icon": "店",
-            "main":  "店舗情報・",
-            "sub":   "アクセス",
+            "icon": "肉",
+            "main":  "上質お肉の",
+            "sub":   "ラインナップ",
             "color": GOLD,
             "accent": WHITE,
         },
@@ -309,7 +309,7 @@ def create_rich_menu(token: str) -> str:
             },
             {
                 "bounds": {"x": CELL_W*2,  "y": CELL_H, "width": CELL_W, "height": CELL_H},
-                "action": {"type": "postback", "data": "action=store_info", "label": "店舗情報・アクセス"}
+                "action": {"type": "postback", "data": "action=store_info", "label": "上質お肉のラインナップ"}
             },
         ]
     }

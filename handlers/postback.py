@@ -12,7 +12,7 @@ from linebot.v3.messaging import (
 from linebot.v3.webhooks import PostbackEvent
 from templates.messages import (
     welcome_coupon_flex,
-    store_info_message,
+    meat_lineup_message,
     popular_menu_ranking,
     senkoh_shishoku_ticket,
 )
@@ -90,7 +90,10 @@ async def handle_postback(event: PostbackEvent, api_client: ApiClient, db):
         ]
 
     elif data == "action=store_info":
-        messages = [store_info_message()]
+        messages = [
+            TextMessage(text="🥩 スギモトこだわりの上質お肉をご紹介します\n\n厳選素材の数々をぜひご堪能ください✨"),
+            meat_lineup_message()
+        ]
 
     else:
         logger.warning(f"未定義のpostback data: {data}")

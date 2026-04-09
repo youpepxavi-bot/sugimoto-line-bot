@@ -458,8 +458,80 @@ def osusume_of_the_day(items: list[dict]) -> FlexMessage:
 
 
 # ─────────────────────────────────────────
-# 4. 店舗情報
+# 4. お肉ラインナップ
 # ─────────────────────────────────────────
+
+def meat_lineup_message() -> FlexMessage:
+    """スギモトこだわりの上質お肉ラインナップ"""
+    items = [
+        {"name": "黒毛和牛 特上カルビ", "desc": "A5ランク厳選。霜降りの旨みが口いっぱいに広がる極上の一枚。", "price": "3,300円"},
+        {"name": "特選タン塩", "desc": "厚切りでしか味わえない、柔らかくジューシーな希少部位。", "price": "2,200円"},
+        {"name": "和牛ミスジ", "desc": "1頭から少量しか取れない希少部位。なめらかな食感とコクが絶品。", "price": "2,750円"},
+        {"name": "黒毛和牛 上ロース", "desc": "きめ細かい霜降りと上品な甘みが特長の定番部位。", "price": "2,970円"},
+        {"name": "特上ハラミ", "desc": "赤身の旨みと柔らかさを兼ね備えた、スギモト自慢の一品。", "price": "1,980円"},
+    ]
+
+    bubbles = []
+    for i, item in enumerate(items, 1):
+        bubble = {
+            "type": "bubble",
+            "size": "kilo",
+            "header": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": f"🥩 No.{i}",
+                        "color": "#C9A84C",
+                        "size": "xs",
+                        "weight": "bold"
+                    }
+                ],
+                "backgroundColor": "#1A1A1A",
+                "paddingAll": "10px"
+            },
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": item["name"],
+                        "size": "md",
+                        "weight": "bold",
+                        "color": "#1A1A1A",
+                        "wrap": True
+                    },
+                    {
+                        "type": "text",
+                        "text": item["desc"],
+                        "size": "xs",
+                        "color": "#777777",
+                        "wrap": True,
+                        "margin": "sm"
+                    },
+                    {
+                        "type": "text",
+                        "text": f"{item['price']}（税込）",
+                        "size": "sm",
+                        "color": "#8B0000",
+                        "weight": "bold",
+                        "margin": "md"
+                    }
+                ],
+                "paddingAll": "14px"
+            }
+        }
+        bubbles.append(bubble)
+
+    carousel = {"type": "carousel", "contents": bubbles}
+
+    return FlexMessage(
+        alt_text="🥩 スギモトこだわりの上質お肉ラインナップ",
+        contents=FlexContainer.from_dict(carousel)
+    )
+
 
 def store_info_message() -> FlexMessage:
     """店舗情報・アクセス"""
