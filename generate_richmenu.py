@@ -72,17 +72,17 @@ def generate_rich_menu_image(output_path: str = "richmenu.png"):
             "accent": WHITE,
         },
         {
-            "icon": "膳",
-            "main":  "本日の",
-            "sub":   "おすすめ・メニュー",
+            "icon": "位",
+            "main":  "人気メニュー",
+            "sub":   "ランキング",
             "color": CRIMSON,
             "accent": GOLD,
         },
         # Row 2
         {
-            "icon": "誕",
-            "main":  "誕生日",
-            "sub":   "登録",
+            "icon": "試",
+            "main":  "先行試食",
+            "sub":   "チケット",
             "color": GOLD,
             "accent": WHITE,
         },
@@ -296,12 +296,12 @@ def create_rich_menu(token: str) -> str:
             },
             {
                 "bounds": {"x": CELL_W*2,  "y": 0,      "width": CELL_W, "height": CELL_H},
-                "action": {"type": "postback", "data": "action=menu",       "label": "本日のおすすめ・メニュー"}
+                "action": {"type": "postback", "data": "action=menu",       "label": "人気メニューランキング"}
             },
             # Row 2
             {
                 "bounds": {"x": 0,         "y": CELL_H, "width": CELL_W, "height": CELL_H},
-                "action": {"type": "postback", "data": "action=birthday",   "label": "誕生日登録"}
+                "action": {"type": "postback", "data": "action=birthday",   "label": "先行試食チケット"}
             },
             {
                 "bounds": {"x": CELL_W,    "y": CELL_H, "width": CELL_W, "height": CELL_H},

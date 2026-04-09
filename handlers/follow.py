@@ -8,10 +8,12 @@ from linebot.v3.messaging import (
     ApiClient,
     MessagingApi,
     ReplyMessageRequest,
+    PushMessageRequest,
+    TextMessage,
 )
 from linebot.v3.webhooks import FollowEvent
 from database import upsert_user
-from templates.messages import welcome_messages
+from templates.messages import welcome_messages, BIRTHDAY_REGISTER_PROMPT
 
 logger = logging.getLogger(__name__)
 
@@ -47,3 +49,14 @@ async def handle_follow(event: FollowEvent, api_client: ApiClient, db):
         )
     except Exception as e:
         logger.error(f"ウェルカムメッセージ送信エラー: {e}")
+
+    # 誕生日登録の案内をプッシュ送信（replyは1回しか使えないためpushで送信）
+    try:
+        line_api.push_message(
+            PushMessageRequest(
+                to=user_id,
+                messages=[TextMessage(text=BIRTHDAY_REGISTER_PROMPT)]
+            )
+        )
+    except Exception as e:
+        logger.error(f"誕生日登録案内送信エラー: {e}")

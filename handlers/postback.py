@@ -13,8 +13,8 @@ from linebot.v3.webhooks import PostbackEvent
 from templates.messages import (
     welcome_coupon_flex,
     store_info_message,
-    osusume_of_the_day,
-    BIRTHDAY_REGISTER_PROMPT,
+    popular_menu_ranking,
+    senkoh_shishoku_ticket,
 )
 
 logger = logging.getLogger(__name__)
@@ -65,31 +65,16 @@ async def handle_postback(event: PostbackEvent, api_client: ApiClient, db):
         ]
 
     elif data == "action=menu":
-        # 本日のおすすめ（実際は管理画面やDBから取得する想定）
-        sample_items = [
-            {
-                "name": "黒毛和牛 特上カルビ",
-                "description": "口の中でとろける霜降りの旨み。炭火でじっくり焼き上げた極上の一品。",
-                "price": "3,300円（税込）"
-            },
-            {
-                "name": "特選タン塩",
-                "description": "厚切りで提供する希少部位のタン。レモンを絞ってどうぞ。",
-                "price": "2,200円（税込）"
-            },
-            {
-                "name": "和牛ミスジ",
-                "description": "1頭から少量しか取れない希少部位。なめらかな食感とコクが絶品。",
-                "price": "2,750円（税込）"
-            },
-        ]
         messages = [
-            TextMessage(text="🍖 本日のおすすめをご案内します\n\nスタッフもイチオシの品々です✨"),
-            osusume_of_the_day(sample_items)
+            TextMessage(text="🏆 人気メニューランキングをご案内します\n\nお客様に特に選ばれている一品をご覧ください✨"),
+            popular_menu_ranking()
         ]
 
     elif data == "action=birthday":
-        messages = [TextMessage(text=BIRTHDAY_REGISTER_PROMPT)]
+        messages = [
+            TextMessage(text="🥩 LINE会員限定の先行試食チケットです！\n\n新メニューをいち早く無料でお試しいただけます。\nご来店の際にスタッフへご提示ください🎁"),
+            senkoh_shishoku_ticket()
+        ]
 
     elif data == "action=news":
         messages = [

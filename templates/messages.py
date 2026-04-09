@@ -560,7 +560,223 @@ def store_info_message() -> FlexMessage:
 
 
 # ─────────────────────────────────────────
-# 5. 誕生日登録ガイダンス
+# 5. 人気メニューランキング
+# ─────────────────────────────────────────
+
+def popular_menu_ranking() -> FlexMessage:
+    """人気メニューランキング（TOP5）"""
+    ranking_items = [
+        {"rank": "1", "name": "黒毛和牛 特上カルビ", "price": "3,300円（税込）"},
+        {"rank": "2", "name": "特選タン塩", "price": "2,200円（税込）"},
+        {"rank": "3", "name": "和牛ミスジ", "price": "2,750円（税込）"},
+        {"rank": "4", "name": "黒毛和牛 上ロース", "price": "2,970円（税込）"},
+        {"rank": "5", "name": "牛ハラミ", "price": "1,980円（税込）"},
+    ]
+    rank_colors = {
+        "1": "#C9A84C",  # 金
+        "2": "#AAAAAA",  # 銀
+        "3": "#CD7F32",  # 銅
+    }
+
+    rows = []
+    for item in ranking_items:
+        color = rank_colors.get(item["rank"], "#555555")
+        rows.append({
+            "type": "box",
+            "layout": "horizontal",
+            "paddingTop": "8px",
+            "paddingBottom": "8px",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": f"#{item['rank']}",
+                    "size": "lg",
+                    "weight": "bold",
+                    "color": color,
+                    "flex": 1,
+                    "align": "center"
+                },
+                {
+                    "type": "text",
+                    "text": item["name"],
+                    "size": "sm",
+                    "color": "#1A1A1A",
+                    "flex": 4,
+                    "wrap": True
+                },
+                {
+                    "type": "text",
+                    "text": item["price"],
+                    "size": "xs",
+                    "color": "#8B0000",
+                    "weight": "bold",
+                    "flex": 3,
+                    "align": "end"
+                }
+            ]
+        })
+        rows.append({"type": "separator", "color": "#EEEEEE"})
+
+    bubble = {
+        "type": "bubble",
+        "size": "mega",
+        "header": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "🏆 人気メニューランキング",
+                    "color": "#C9A84C",
+                    "size": "md",
+                    "weight": "bold"
+                },
+                {
+                    "type": "text",
+                    "text": "お客様に選ばれたTOP5",
+                    "color": "#AAAAAA",
+                    "size": "xs"
+                }
+            ],
+            "backgroundColor": "#1A1A1A",
+            "paddingAll": "20px"
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": rows,
+            "paddingAll": "16px"
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "お肉膳スギモト 三井アウトレットパーク岡崎店",
+                    "size": "xs",
+                    "color": "#C9A84C",
+                    "align": "center"
+                }
+            ],
+            "backgroundColor": "#1A1A1A",
+            "paddingAll": "12px"
+        }
+    }
+
+    return FlexMessage(
+        alt_text="🏆 人気メニューランキング TOP5",
+        contents=FlexContainer.from_dict(bubble)
+    )
+
+
+# ─────────────────────────────────────────
+# 6. 先行試食チケット
+# ─────────────────────────────────────────
+
+def senkoh_shishoku_ticket() -> FlexMessage:
+    """先行試食チケット（Flexメッセージ）"""
+    bubble = {
+        "type": "bubble",
+        "size": "mega",
+        "header": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "🥩 LINE会員限定",
+                    "color": "#C9A84C",
+                    "size": "sm",
+                    "weight": "bold"
+                },
+                {
+                    "type": "text",
+                    "text": "先行試食チケット",
+                    "color": "#FFFFFF",
+                    "size": "xl",
+                    "weight": "bold"
+                }
+            ],
+            "backgroundColor": "#8B0000",
+            "paddingAll": "20px"
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "新メニューをいち早く",
+                    "size": "lg",
+                    "weight": "bold",
+                    "color": "#1A1A1A",
+                    "align": "center"
+                },
+                {
+                    "type": "text",
+                    "text": "無料でご試食いただけます",
+                    "size": "sm",
+                    "color": "#555555",
+                    "align": "center",
+                    "margin": "sm"
+                },
+                {
+                    "type": "separator",
+                    "margin": "md",
+                    "color": "#C9A84C"
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "md",
+                    "contents": [
+                        {
+                            "type": "text",
+                            "text": "【ご利用条件】",
+                            "size": "sm",
+                            "color": "#555555",
+                            "weight": "bold"
+                        },
+                        {
+                            "type": "text",
+                            "text": "・新メニュー提供開始前の特別試食会にご招待\n・LINE友だち限定の先行特典\n・ご来店時にこの画面をスタッフへご提示ください\n・お1人様1回限り有効",
+                            "size": "xs",
+                            "color": "#777777",
+                            "wrap": True,
+                            "margin": "sm"
+                        }
+                    ]
+                }
+            ],
+            "backgroundColor": "#FAFAFA",
+            "paddingAll": "20px"
+        },
+        "footer": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+                {
+                    "type": "text",
+                    "text": "お肉膳スギモト 三井アウトレットパーク岡崎店",
+                    "size": "xs",
+                    "color": "#C9A84C",
+                    "align": "center"
+                }
+            ],
+            "backgroundColor": "#1A1A1A",
+            "paddingAll": "12px"
+        }
+    }
+
+    return FlexMessage(
+        alt_text="【LINE会員限定】先行試食チケット",
+        contents=FlexContainer.from_dict(bubble)
+    )
+
+
+# ─────────────────────────────────────────
+# 7. 誕生日登録ガイダンス
 # ─────────────────────────────────────────
 
 BIRTHDAY_REGISTER_PROMPT = """🎂 誕生日を登録して、
